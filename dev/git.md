@@ -19,13 +19,13 @@ Instalar y habilitar git
 ```
 
 Agregar Usuario
-```batsh
+```batch
 [root@git-server ~]# useradd git
 [root@git-server ~]# passwd git
 ```
 
 Iniciar sesion con usuario git y configurar ambiente 
-```bash
+```batch
 [root@git-server ~] su - git
 [git@git-server ~]$ mkdir ~/repo
 [git@git-server ~]$ cd ~/repo
@@ -38,7 +38,7 @@ Instalar git para el SO que se utiliza
 
 y en la consola de git hacer lo siguiente
 
-```bash
+```batch
 [ahmer@git-client ~]$ ssh-keygen
 [ahmer@git-client ~]$ ssh-copy-id git@url-remote-git.com
 [ahmer@git-client ~]$ ssh git@url-remote-git.com
@@ -107,18 +107,27 @@ echo "branch is $branch"
 if [ "master" == "$branch" ]; then
     echo "checkout $branch"
     git --work-tree=/var/www/gitweb/erp checkout -f $branch
+    #archivos a con su propia configuracion en qa, prd y local, son copiados con su nombre sin la extencion
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn.php
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_sop.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_sop.php
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_cli.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_cli.php
 fi
 
 if [ "master-cbv" == "$branch" ]; then
     echo "checkout $branch"
     git --work-tree=/var/www/gitweb/cbv checkout -f $branch
+    #archivos a con su propia configuracion en qa, prd y local, son copiados con su nombre sin la extencion
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn.php
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_sop.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_sop.php
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_cli.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_cli.php
 fi
 
 echo "done"
 
+
 ```
 
-con esto podemos detectar que branch es a la que se le esta haciendo push y asi saber a que vhost enviarlo
+con esto podemos detectar que branch es a la que se le esta haciendo push y asi saber a que vhost enviarlo sirve para qa y prd, hace falta un hook para cuando se genera un git reset (volver a un commit anterior)
 
 solo nos falta darle permiso de ejecucon y el repositorio estara listo para ayudarnos en el deploy 
 ```batch
@@ -173,15 +182,47 @@ echo " "
 echo "Fusionando branch \"$merged_branch_name\" en \"$branch_name\". "
 
 
-if [ "master" == "$branch_name" ]; then
+if [ "dev-master" == "$branch_name" ]; then
     echo "checkout $branch_name"
     git --work-tree='/c/xampp/htdocs/vhost/dynworkKchay/' checkout -f $branch_name
+    #archivos a con su propia configuracion en qa, prd y local, son copiados con su nombre sin la extencion
+    mv /c/xampp/htdocs/vhost/dynworkKchay/dac/class.conn.php.local /c/xampp/htdocs/vhost/dynworkKchay/dac/class.conn.php
+    mv /c/xampp/htdocs/vhost/dynworkKchay/dac/class.conn_sop.php.local /c/xampp/htdocs/vhost/dynworkKchay/dac/class.conn_sop.php
+    mv /c/xampp/htdocs/vhost/dynworkKchay/dac/class.conn_cli.php.local /c/xampp/htdocs/vhost/dynworkKchay/dac/class.conn_cli.php
 fi
 
-if [ "master-cbv" == "$branch_name" ]; then
+if [ "dev-master-cbv" == "$branch_name" ]; then
     echo "checkout $branch_name"
     git --work-tree='/c/xampp/htdocs/vhost/cbvKchay/' checkout -f $branch_name
+    #archivos a con su propia configuracion en qa, prd y local, son copiados con su nombre sin la extencion
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn.php
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_sop.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_sop.php
+    mv /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_cli.php.local /c/xampp/htdocs/vhost/cbvKchay/dac/class.conn_cli.php
 fi
+
+# Ask the question
+#read -p "Estas seguro de borrar \"$merged_branch_name\" branch local? (y/N) " answer
+
+# Check if the answer is a single lowercase Y
+#if [[ "$answer" == "y" ]]; then
+#if ask "Estas seguro de borrar \"$merged_branch_name\" branch local? (y/N) "; then
+#    # Delete the local branch
+#    echo "Borrando branch local \"$merged_branch_name\""
+#    git branch -d $merged_branch_name
+#
+#   # read -p "Estas seguro de borrar \"$merged_branch_name\" branch remote? (y/N) " answer
+#
+#    #if [[ "$answer" == "y" ]]; then
+#    if ask "Estas seguro de borrar \"$merged_branch_name\" branch remote? (y/N) "; then
+#    # Delete the remote branch
+#        echo "Deleting remote branch"
+#        git push origin --delete $merged_branch_name
+#    fi
+#
+#    exit 1
+#else
+#    echo "No se borrara \"$merged_branch_name\" branch"
+#fi
 ```
 
 ```
