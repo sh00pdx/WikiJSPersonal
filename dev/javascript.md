@@ -1,8 +1,8 @@
 ---
 title: Utilidades Javascript
-description: Trozos de codigo 
+description: Trozos de codigo
 published: true
-date: 2020-01-23T17:50:02.441Z
+date: 2020-05-24T03:25:14.598Z
 tags: 
 ---
 
@@ -158,6 +158,114 @@ $(document).keydown(function(){
 				console.log('mostrar popover');
 			}
 });
+```
+
+## Templetas literales.
+Haciendo uso de el caracter "Grave accent" y "${}" se puede "concatenar" texto con variables o funciones javascript
+
+* Ejemplo
+```javascript
+var nombre = 'Juan';
+
+console.log(`Hola ${nombre}`);
+// output: Hola Juan
+```
+
+## Funciones de Flecha
+Se escribe una funcion como que fuera una variable.
+
+* Formar Larga
+```javascript
+let saludar = (nombre) => {
+	return `Hola ${nombre}`;
+}
+```
+
+* Forma Corta
+```javascript
+let saludar = (nombre) =>  `Hola ${nombre}`;
+```
+
+## Callbacks
+Creando callbacks personalizados.
+
+* ejemplo
+```javascript
+let empleados = [
+    {
+        id: 1,
+        nombre: 'Marcos'
+    },{
+        id: 2,
+        nombre: 'Felipe'
+    },{
+        id: 3,
+        nombre: 'Francisco'
+    }
+];
+
+let getEmpleadoById = (id, callback) => {
+    var empleadoDB = empleados.find( empleado => id === empleado.id);
+
+    if(!empleadoDB){
+        //ERROR
+        // se le pasa solo un parametro (el error)
+        callback(`No se ha encontrado el empleado con id ${id}`);
+    }else{
+    		// se le pasa el primer parametro en null para indicar que no existe error y el segundo parametro que es el objeto.
+        callback(null, empleadoDB);
+    }
+};
+
+//Llamamos a la funcion getEmpleado que ejecutara un callbacks con funcion anonima de flechas.
+
+getEmpleadoById(
+    3, 
+    (err ,empleadoDB) => {
+        if(err){
+            return console.log(err);
+        }
+        console.log(empleadoDB)
+})
+
+// llamando a getEmpleadosById con funcion anonima normal
+getEmpleadoById(3, function (err ,empleadoDB) {
+    if(err){
+        return console.log(err);
+    }
+
+    getSalarioByEmpleado(empleadoDB, (err, empleado) =>{
+        if(err){
+            return console.log(err);
+        }
+        console.log(empleado);
+    })
+})
+```
+
+## Promesas
+* Teniendo
+```javascript
+let empleados = [
+    {
+        id: 1,
+        nombre: 'Marcos'
+    },{
+        id: 2,
+        nombre: 'Felipe'
+    },{
+        id: 3,
+        nombre: 'Francisco'
+    }
+];
+```
+* Se crea la promesa para buscar empleados 
+```javascript
+	
+```
+* Se llama a la promesa
+```javascript
+	
 ```
 
 # TIPS
