@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-05-24T04:45:48.488Z
+date: 2020-05-24T04:47:43.661Z
 tags: 
 ---
 
@@ -323,7 +323,6 @@ let salarios = [
 	let getEmpleadoById = (id) => {
     return new Promise( (resolve, reject) => {
         var empleadoDB = empleados.find( empleado => id === empleado.id);
-
         if(!empleadoDB){
             //ERROR
             reject(`No se ha encontrado el empleado con id ${id}`);
@@ -331,16 +330,32 @@ let salarios = [
             resolve(empleadoDB);
         }
     });
-    
 };
 
+let getSalarioByEmpleado = (empleado) => {
+    return new Promise( (resolve, reject) => {
+let salarioEmpleado = salarios.find(salario => salario.id === empleado.id);
+    
+        if(!salarioEmpleado){
+            reject(`No se ha encontrado Salario para el empleado ${empleado.nombre}`)
+        }else{
+            empleado.salario = salarioEmpleado.salario;
+            resolve(empleado);
+        }
+    });
+};
 ```
 * Se llama a la promesa
 ```javascript
-getEmpleadoById(10).then(
-    //funcion en caso de ejecucion correcta
-    (empleado) => console.log(empleado),
-    //funcion en caso de error
+
+getEmpleadoById(3).then(
+		// ejecuta la accion del resolve de la primera promesa, retornando la llamada a la segunda promesa.
+    empleado => { return getSalarioByEmpleado(empleado); }
+).then(
+		// se ejecuta la accion del resolve de la segunda promesa
+    (empleadoSalario) => {console.log(empleadoSalario)}
+).catch(
+		// se programa el catch el cual resolvera el error de cualquiera promesa llamada anteriormente
     (err) => console.log(err)
 );
 ```
