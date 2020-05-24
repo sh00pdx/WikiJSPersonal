@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-05-24T04:45:18.552Z
+date: 2020-05-24T04:45:48.488Z
 tags: 
 ---
 
@@ -321,10 +321,6 @@ let salarios = [
 * Se crea la promesa para buscar empleados y buscar sueldos segun empleados
 ```javascript
 	let getEmpleadoById = (id) => {
-    
-    //return new Promise( function (resolve, reject){
-    //});
-
     return new Promise( (resolve, reject) => {
         var empleadoDB = empleados.find( empleado => id === empleado.id);
 
