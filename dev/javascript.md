@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-05-24T03:26:12.618Z
+date: 2020-05-24T04:45:18.552Z
 tags: 
 ---
 
@@ -260,6 +260,65 @@ let empleados = [
 ];
 ```
 * Se crea la promesa para buscar empleados 
+```javascript
+	let getEmpleadoById = (id) => {
+    
+    //return new Promise( function (resolve, reject){
+    //});
+
+    return new Promise( (resolve, reject) => {
+        var empleadoDB = empleados.find( empleado => id === empleado.id);
+
+        if(!empleadoDB){
+            //ERROR
+            reject(`No se ha encontrado el empleado con id ${id}`);
+        }else{
+            resolve(empleadoDB);
+        }
+    });
+    
+};
+
+```
+* Se llama a la promesa
+```javascript
+getEmpleadoById(10).then(
+    //funcion en caso de ejecucion correcta
+    (empleado) => console.log(empleado),
+    //funcion en caso de error
+    (err) => console.log(err)
+);
+```
+
+## Promesas Encadenadas
+
+* Teniendo 
+```javascript
+let empleados = [
+    {
+        id: 1,
+        nombre: 'Marcos'
+    },{
+        id: 2,
+        nombre: 'Felipe'
+    },{
+        id: 3,
+        nombre: 'Francisco'
+    }
+];
+
+let salarios = [
+    {
+        id: 1,
+        salario: 100000
+    },{
+        id: 2,
+        salario: 1000
+    }
+];
+```
+
+* Se crea la promesa para buscar empleados y buscar sueldos segun empleados
 ```javascript
 	let getEmpleadoById = (id) => {
     
