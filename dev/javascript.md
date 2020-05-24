@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-05-24T03:25:33.373Z
+date: 2020-05-24T03:26:12.618Z
 tags: 
 ---
 
@@ -282,7 +282,12 @@ let empleados = [
 ```
 * Se llama a la promesa
 ```javascript
-	
+getEmpleadoById(10).then(
+    //funcion en caso de ejecucion correcta
+    (empleado) => console.log(empleado),
+    //funcion en caso de error
+    (err) => console.log(err)
+);
 ```
 
 # TIPS
