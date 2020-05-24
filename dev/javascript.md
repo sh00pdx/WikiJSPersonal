@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-05-24T03:25:14.598Z
+date: 2020-05-24T03:25:33.373Z
 tags: 
 ---
 
@@ -261,7 +261,24 @@ let empleados = [
 ```
 * Se crea la promesa para buscar empleados 
 ```javascript
-	
+	let getEmpleadoById = (id) => {
+    
+    //return new Promise( function (resolve, reject){
+    //});
+
+    return new Promise( (resolve, reject) => {
+        var empleadoDB = empleados.find( empleado => id === empleado.id);
+
+        if(!empleadoDB){
+            //ERROR
+            reject(`No se ha encontrado el empleado con id ${id}`);
+        }else{
+            resolve(empleadoDB);
+        }
+    });
+    
+};
+
 ```
 * Se llama a la promesa
 ```javascript
