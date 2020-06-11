@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-06-11T14:26:03.345Z
+date: 2020-06-11T14:26:30.773Z
 tags: 
 ---
 
