@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-06-11T14:24:12.686Z
+date: 2020-06-11T14:26:03.345Z
 tags: 
 ---
 
@@ -360,7 +360,7 @@ getEmpleadoById(3).then(
 );
 ```
 
-## Tipo de Redondeo Redondeo
+## Tipos de Redondeo
 
 ### Redondeo
 
