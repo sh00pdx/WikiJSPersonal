@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-05-24T04:47:43.661Z
+date: 2020-06-11T14:24:12.686Z
 tags: 
 ---
 
@@ -358,6 +358,134 @@ getEmpleadoById(3).then(
 		// se programa el catch el cual resolvera el error de cualquiera promesa llamada anteriormente
     (err) => console.log(err)
 );
+```
+
+## Tipo de Redondeo Redondeo
+
+### Redondeo
+
+
+Math.round() redondeará el valor al entero más cercano usando la mitad redondeada hacia arriba para romper los lazos.
+
+```javascript
+var a = Math.round(2.3);       // a is now 2  
+var b = Math.round(2.7);       // b is now 3
+var c = Math.round(2.5);       // c is now 3
+```
+Pero
+
+```javascript
+var c = Math.round(-2.7);       // c is now -3
+var c = Math.round(-2.5);       // c is now -2
+```
+
+Observe cómo -2.5 se redondea a -2 . Esto se debe a que los valores intermedios siempre se redondean hacia arriba, es decir, se redondean al entero con el siguiente valor más alto.
+
+### Redondeando hacia arriba
+
+
+Math.ceil() redondeará el valor hacia arriba.
+
+```javascript
+var a = Math.ceil(2.3);        // a is now 3
+var b = Math.ceil(2.7);        // b is now 3
+```
+
+ceil a un número negativo se redondeará hacia cero
+
+```javascript
+var c = Math.ceil(-1.1);       // c is now 1
+```
+
+### Redondeando hacia abajo
+
+
+Math.floor() redondeará el valor hacia abajo.
+
+```javascript
+var a = Math.floor(2.3);        // a is now 2
+var b = Math.floor(2.7);        // b is now 2
+```
+
+floor coloca un número negativo, se redondeará lejos de cero.
+
+```javascript
+var c = Math.floor(-1.1);       // c is now -1
+```
+
+### Truncando
+
+
+Advertencia : el uso de operadores bitwise (excepto >>> ) solo se aplica a los números entre -2147483649 y 2147483648 .
+
+```
+2.3  | 0;                       // 2 (floor)
+-2.3 | 0;                       // -2 (ceil)
+NaN  | 0;                       // 0
+```
+
+
+Math.trunc()
+
+```javascript
+Math.trunc(2.3);                // 2 (floor)
+Math.trunc(-2.3);               // -2 (ceil)
+Math.trunc(2147483648.1);       // 2147483648 (floor)
+Math.trunc(-2147483649.1);      // -2147483649 (ceil)
+Math.trunc(NaN);                // NaN
+```
+
+### Redondeo a decimales
+
+Math.floor , Math.ceil() y Math.round() se pueden usar para redondear a un número de decimales
+
+Para redondear a 2 decimales:
+
+```javascript
+ var myNum = 2/3;               // 0.6666666666666666
+ var multiplier = 100;
+ var a = Math.round(myNum * multiplier) / multiplier;  // 0.67
+ var b = Math.ceil (myNum * multiplier) / multiplier;  // 0.67
+ var c = Math.floor(myNum * multiplier) / multiplier;  // 0.66
+```
+
+También puede redondear a un número de dígitos:
+
+```javascript
+ var myNum = 10000/3;           // 3333.3333333333335
+ var multiplier = 1/100;
+ var a = Math.round(myNum * multiplier) / multiplier;  // 3300
+ var b = Math.ceil (myNum * multiplier) / multiplier;  // 3400
+ var c = Math.floor(myNum * multiplier) / multiplier;  // 3300
+```
+
+Como una función más utilizable:
+
+```javascript
+ // value is the value to round
+ // places if positive the number of decimal places to round to
+ // places if negative the number of digits to round to
+ function roundTo(value, places){
+     var power = Math.pow(10, places);
+     return Math.round(value * power) / power;
+ }
+ var myNum = 10000/3;    // 3333.3333333333335
+ roundTo(myNum, 2);  // 3333.33
+ roundTo(myNum, 0);  // 3333
+ roundTo(myNum, -2); // 3300
+```
+
+Y las variantes para ceil y floor :
+
+```javascript
+ function ceilTo(value, places){
+     var power = Math.pow(10, places);
+     return Math.ceil(value * power) / power;
+ }
+ function floorTo(value, places){
+     var power = Math.pow(10, places);
+     return Math.floor(value * power) / power;
+ }
 ```
 
 # TIPS
