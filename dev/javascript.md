@@ -2,7 +2,7 @@
 title: Utilidades Javascript
 description: Trozos de codigo
 published: true
-date: 2020-06-11T14:26:30.773Z
+date: 2020-07-30T18:23:02.839Z
 tags: 
 ---
 
@@ -487,7 +487,23 @@ Y las variantes para ceil y floor :
      return Math.floor(value * power) / power;
  }
 ```
+## Recorrer un Json
 
+Teniendo un Json con formato 
+```json
+[{key : value, key2 : value2, key3 : value3, key : { key : value, key2 : value2, key3 : value3} },{key : value, key2 : value2, key3 : value3,...}]
+```
+
+se recorre 
+
+```javascript
+let items = Object.values(data);
+items.map(value => {
+	 console.log(value.key);
+   console.log(value.key2);
+   console.log(value.key3);
+});
+```
 # TIPS
 ## Debug DataTable()
 Escribir en consola del Navegador
